@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistik Pekerjaan - Desa Penunggul</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <style>
+        .bg-primary { background-color: #22c55e; }
+        .bg-primary-dark { background-color: #16a34a; }
+        .text-primary { color: #22c55e; }
+        .mobile-menu { transform: translateX(-100%); transition: transform 0.3s ease-in-out; }
+        .mobile-menu.active { transform: translateX(0); }
+        .digital-clock { font-family: 'Courier New', monospace; background: linear-gradient(45deg, #16a34a, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        @media print {
+            nav, header, footer, .no-print { display: none !important; }
+            body { background: #fff; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <!-- Top Header -->
+        <div class="bg-primary text-white py-2">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-phone text-sm"></i>
+                    <span class="text-sm">+62 XXX-XXXX-XXXX</span>
+                    <i class="fas fa-envelope text-sm ml-4"></i>
+                    <span class="text-sm">desa.penunggul@email.com</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-clock"></i>
+                    <span id="digital-clock" class="digital-clock text-white font-bold"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Header -->
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="https://via.placeholder.com/80x80/22c55e/ffffff?text=LOGO" alt="Logo Desa Penunggul" class="w-16 h-16 md:w-20 md:h-20">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-gray-800">DESA PENUNGGUL</h1>
+                        <p class="text-sm md:text-base text-gray-600">Kecamatan XXX, Kabupaten XXX</p>
+                        <p class="text-xs md:text-sm text-primary font-semibold">Provinsi Jawa Timur</p>
+                    </div>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sticky Navigation Menu -->
+    <nav class="bg-primary-dark text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 py-3">
+                <li class="relative group"><a href="index.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors"><i class="fas fa-home"></i><span>Beranda</span></a></li>
+                <li class="relative group"><a href="detail.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors"><i class="fas fa-newspaper"></i><span>Artikel</span></a></li>
+                <li class="relative group"><a href="produk.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors"><i class="fas fa-store"></i><span>Produk</span></a></li>
+                <li class="relative group"><a href="galeri.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors"><i class="fas fa-images"></i><span>Galeri</span></a></li>
+                <li class="relative group"><a href="statistik.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors"><i class="fas fa-chart-pie"></i><span>Statistik</span></a></li>
+            </ul>
+
+            <!-- Mobile Menu Bar -->
+            <div class="md:hidden flex items-center justify-between py-3">
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/40x40/22c55e/ffffff?text=LOGO" alt="Logo" class="w-8 h-8">
+                    <span class="font-semibold text-lg">Desa Penunggul</span>
+                </div>
+                <button id="mobile-menu-btn-sticky" class="text-white hover:text-green-200">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-80 h-full bg-white shadow-2xl z-50 md:hidden">
+        <div class="p-4 bg-primary text-white flex justify-between items-center">
+            <h3 class="font-bold text-lg">Menu Navigasi</h3>
+            <button id="close-menu-btn" class="text-white hover:text-green-200">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <ul class="py-4">
+            <li><a href="index.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-home mr-3"></i>Beranda</a></li>
+            <li><a href="detail.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-newspaper mr-3"></i>Artikel</a></li>
+            <li><a href="produk.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-store mr-3"></i>Produk</a></li>
+            <li><a href="galeri.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-images mr-3"></i>Galeri</a></li>
+            <li><a href="statistik.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary"><i class="fas fa-chart-pie mr-3"></i>Statistik</a></li>
+        </ul>
+    </div>
+    <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+    <!-- Breadcrumbs -->
+    <section class="bg-white border-b">
+        <div class="container mx-auto px-4 py-4 text-sm text-gray-600">
+            <a href="index.html" class="hover:text-primary"><i class="fas fa-home mr-1"></i>Beranda</a>
+            <span class="mx-2">/</span>
+            <span class="text-gray-800">Statistik Pekerjaan</span>
+        </div>
+    </section>
+
+    <!-- Chart Controls -->
+    <section class="py-8">
+        <div class="container mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 no-print">
+                    <div class="flex items-center gap-3">
+                        <span class="font-semibold text-gray-700">Tipe Grafik:</span>
+                        <select id="chart-type" class="border rounded-lg px-3 py-2 text-sm">
+                            <option value="pie">Pie</option>
+                            <option value="bar">Bar</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="btn-print" class="bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md text-sm">
+                            <i class="fas fa-print mr-2"></i>Cetak
+                        </button>
+                        <button id="btn-download" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-md text-sm">
+                            <i class="fas fa-download mr-2"></i>Unduh PNG
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <canvas id="jobsChart" class="bg-white rounded-lg"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-3">Sumber: Data kependudukan Desa Penunggul (contoh).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mangrove Ornament Section -->
+    <section class="bg-gradient-to-b from-green-50 to-green-100 py-8 overflow-hidden">
+        <div class="relative">
+            <svg viewBox="0 0 1200 200" class="w-full h-32 md:h-40 text-green-600">
+                <g fill="currentColor">
+                    <path d="M50 200 L50 150 Q60 140 70 150 L70 130 Q80 120 90 130 L90 100 Q100 90 110 100 L110 70 Q120 60 130 70 L130 30 Q140 20 150 30 L150 200 Z"/>
+                    <path d="M40 200 Q50 180 60 200 Q70 180 80 200 Q90 180 100 200 Q110 180 120 200 Q130 180 140 200 Q150 180 160 200"/>
+                    <path d="M200 200 L200 160 Q210 150 220 160 L220 140 Q230 130 240 140 L240 110 Q250 100 260 110 L260 80 Q270 70 280 80 L280 40 Q290 30 300 40 L300 200 Z"/>
+                    <path d="M190 200 Q200 185 210 200 Q220 185 230 200 Q240 185 250 200 Q260 185 270 200 Q280 185 290 200 Q300 185 310 200"/>
+                    <path d="M350 200 L350 155 Q360 145 370 155 L370 135 Q380 125 390 135 L390 105 Q400 95 410 105 L410 75 Q420 65 430 75 L430 45 Q440 35 450 45 L450 200 Z"/>
+                    <path d="M340 200 Q350 182 360 200 Q370 182 380 200 Q390 182 400 200 Q410 182 420 200 Q430 182 440 200 Q450 182 460 200"/>
+                    <path d="M500 200 L500 170 Q510 160 520 170 L520 150 Q530 140 540 150 L540 120 Q550 110 560 120 L560 200 Z"/>
+                    <path d="M490 200 Q500 188 510 200 Q520 188 530 200 Q540 188 550 200 Q560 188 570 200"/>
+                    <path d="M600 200 L600 158 Q610 148 620 158 L620 138 Q630 128 640 138 L640 108 Q650 98 660 108 L660 78 Q670 68 680 78 L680 48 Q690 38 700 48 L700 200 Z"/>
+                    <path d="M590 200 Q600 183 610 200 Q620 183 630 200 Q640 183 650 200 Q660 183 670 200 Q680 183 690 200 Q700 183 710 200"/>
+                    <path d="M750 200 L750 165 Q760 155 770 165 L770 145 Q780 135 790 145 L790 115 Q800 105 810 115 L810 85 Q820 75 830 85 L830 200 Z"/>
+                    <path d="M740 200 Q750 186 760 200 Q770 186 780 200 Q790 186 800 200 Q810 186 820 200 Q830 186 840 200"/>
+                    <path d="M880 200 L880 152 Q890 142 900 152 L900 132 Q910 122 920 132 L920 102 Q930 92 940 102 L940 72 Q950 62 960 72 L960 42 Q970 32 980 42 L980 200 Z"/>
+                    <path d="M870 200 Q880 181 890 200 Q900 181 910 200 Q920 181 930 200 Q940 181 950 200 Q960 181 970 200 Q980 181 990 200"/>
+                    <path d="M1020 200 L1020 175 Q1030 165 1040 175 L1040 155 Q1050 145 1060 155 L1060 125 Q1070 115 1080 125 L1080 200 Z"/>
+                    <path d="M1010 200 Q1020 190 1030 200 Q1040 190 1050 200 Q1060 190 1070 200 Q1080 190 1090 200"/>
+                    <path d="M1120 200 L1120 155 Q1130 145 1140 155 L1140 135 Q1150 125 1160 135 L1160 105 Q1170 95 1180 105 L1180 75 Q1190 65 1200 75 L1200 200 Z"/>
+                    <path d="M1110 200 Q1120 184 1130 200 Q1140 184 1150 200 Q1160 184 1170 200 Q1180 184 1190 200 Q1200 184 1210 200"/>
+                </g>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About Section -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://via.placeholder.com/50x50/22c55e/ffffff?text=LOGO" alt="Logo" class="w-12 h-12">
+                        <div>
+                            <h3 class="font-bold text-lg">Desa Penunggul</h3>
+                            <p class="text-sm text-gray-300">Jawa Timur</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">Desa Penunggul adalah desa yang berkomitmen untuk mewujudkan masyarakat yang maju, mandiri, dan sejahtera melalui berbagai program pembangunan dan pemberdayaan masyarakat.</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fab fa-youtube text-xl"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors"><i class="fab fa-whatsapp text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Menu Utama</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-primary transition-colors text-sm">Beranda</a></li>
+                        <li><a href="detail.html" class="text-gray-300 hover:text-primary transition-colors text-sm">Artikel</a></li>
+                        <li><a href="produk.html" class="text-gray-300 hover:text-primary transition-colors text-sm">Produk</a></li>
+                        <li><a href="galeri.html" class="text-gray-300 hover:text-primary transition-colors text-sm">Galeri</a></li>
+                        <li><a href="statistik.html" class="text-gray-300 hover:text-primary transition-colors text-sm">Statistik</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Layanan</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Data Statistik</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Peta Desa</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Pengumuman</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Kontak Kami</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-primary mt-1"></i>
+                            <div>
+                                <p class="text-sm text-gray-300">Jl. Raya Desa Penunggul</p>
+                                <p class="text-sm text-gray-300">Kec. XXX, Kab. XXX</p>
+                                <p class="text-sm text-gray-300">Jawa Timur, Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-primary"></i>
+                            <span class="text-sm text-gray-300">+62 XXX-XXXX-XXXX</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <span class="text-sm text-gray-300">desa.penunggul@email.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-globe text-primary"></i>
+                            <span class="text-sm text-gray-300">www.penunggul.desa.id</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Footer -->
+        <div class="border-t border-gray-700">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-sm text-gray-300 mb-4 md:mb-0">© 2024 Desa Penunggul. Semua hak cipta dilindungi.</p>
+                    <div class="flex items-center space-x-4 text-sm text-gray-300">
+                        <span>Powered by OpenSID</span>
+                        <span>|</span>
+                        <a href="#" class="hover:text-primary transition-colors">Kebijakan Privasi</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-primary transition-colors">Syarat & Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Digital Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            const el = document.getElementById('digital-clock');
+            if (el) el.textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuBtnSticky = document.getElementById('mobile-menu-btn-sticky');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        function openMobileMenu() { mobileMenu.classList.add('active'); mobileMenuBackdrop.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function closeMobileMenu() { mobileMenu.classList.remove('active'); mobileMenuBackdrop.classList.add('hidden'); document.body.style.overflow = ''; }
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (mobileMenuBtnSticky) mobileMenuBtnSticky.addEventListener('click', openMobileMenu);
+        if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMobileMenu);
+        if (mobileMenuBackdrop) mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+
+        // Sticky nav shadow
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) nav.classList.add('shadow-2xl'); else nav.classList.remove('shadow-2xl');
+        });
+
+        // Chart.js setup
+        const ctx = document.getElementById('jobsChart');
+        const chartTypeSelect = document.getElementById('chart-type');
+        const btnPrint = document.getElementById('btn-print');
+        const btnDownload = document.getElementById('btn-download');
+
+        const labels = ['Petani', 'Nelayan', 'Pedagang', 'PNS', 'Karyawan', 'Wiraswasta', 'Pelajar/Mahasiswa'];
+        const dataValues = [320, 180, 150, 60, 210, 120, 400];
+        const colors = ['#22c55e','#16a34a','#15803d','#4ade80','#86efac','#a7f3d0','#bbf7d0'];
+
+        let chart;
+        function renderChart(type) {
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Penduduk',
+                        data: dataValues,
+                        backgroundColor: type === 'pie' ? colors : '#22c55e',
+                        borderColor: type === 'pie' ? '#ffffff' : '#15803d',
+                        borderWidth: type === 'pie' ? 2 : 1,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: type === 'pie' ? 'bottom' : 'top' },
+                        tooltip: { enabled: true },
+                    },
+                    scales: type === 'bar' ? {
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    } : {}
+                }
+            });
+            // set canvas height
+            ctx.parentElement.style.height = type === 'pie' ? '420px' : '460px';
+        }
+        renderChart('pie');
+
+        chartTypeSelect.addEventListener('change', (e) => {
+            renderChart(e.target.value);
+        });
+
+        btnPrint.addEventListener('click', () => { window.print(); });
+
+        btnDownload.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'statistik-pekerjaan.png';
+            link.href = chart.toBase64Image('image/png', 1);
+            link.click();
+        });
+    </script>
+</body>
+</html>
+
+

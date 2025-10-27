@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Penunggul - Website Resmi</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        .bg-primary { background-color: #22c55e; }
+        .bg-primary-dark { background-color: #16a34a; }
+        .text-primary { color: #22c55e; }
+        .border-primary { border-color: #22c55e; }
+        
+        /* Custom animations */
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.3s ease-out;
+        }
+        
+        /* Mobile menu overlay */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Clock styling */
+        .digital-clock {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(45deg, #16a34a, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg">
+        <!-- Top Header -->
+        <div class="bg-primary text-white py-2">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-phone text-sm"></i>
+                    <span class="text-sm">+62 XXX-XXXX-XXXX</span>
+                    <i class="fas fa-envelope text-sm ml-4"></i>
+                    <span class="text-sm">desa.penunggul@email.com</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-clock"></i>
+                    <span id="digital-clock" class="digital-clock text-white font-bold"></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Header -->
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo and Village Info -->
+                <div class="flex items-center space-x-4">
+                    <img src="https://via.placeholder.com/80x80/22c55e/ffffff?text=LOGO" alt="Logo Desa Penunggul" class="w-16 h-16 md:w-20 md:h-20">
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-bold text-gray-800">DESA PENUNGGUL</h1>
+                        <p class="text-sm md:text-base text-gray-600">Kecamatan XXX, Kabupaten XXX</p>
+                        <p class="text-xs md:text-sm text-primary font-semibold">Provinsi Jawa Timur</p>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-600 hover:text-primary">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Sticky Navigation Menu -->
+    <nav class="bg-primary-dark text-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4">
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8 py-3">
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-home"></i>
+                        <span>Beranda</span>
+                    </a>
+                </li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Profil Desa</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </a>
+                    <!-- Dropdown -->
+                    <ul class="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Sejarah Desa</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Visi & Misi</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-users"></i>
+                        <span>Pemerintahan</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </a>
+                    <ul class="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Perangkat Desa</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">BPD</a></li>
+                    </ul>
+                </li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-newspaper"></i>
+                        <span>Berita</span>
+                    </a>
+                </li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Layanan</span>
+                        <i class="fas fa-chevron-down text-xs"></i>
+                    </a>
+                    <ul class="absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-md py-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Surat Keterangan</a></li>
+                        <li><a href="#" class="block px-4 py-2 hover:bg-green-50 hover:text-primary">Surat Pengantar</a></li>
+                    </ul>
+                </li>
+                <li class="relative group">
+                    <a href="#" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                        <i class="fas fa-phone"></i>
+                        <span>Kontak</span>
+                    </a>
+                </li>
+                    <li class="relative group">
+                        <a href="statistik.html" class="flex items-center space-x-1 hover:text-green-200 transition-colors">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Statistik</span>
+                        </a>
+                    </li>
+            </ul>
+            
+            <!-- Mobile Menu Bar -->
+            <div class="md:hidden flex items-center justify-between py-3">
+                <div class="flex items-center space-x-2">
+                    <img src="https://via.placeholder.com/40x40/22c55e/ffffff?text=LOGO" alt="Logo" class="w-8 h-8">
+                    <span class="font-semibold text-lg">Desa Penunggul</span>
+                </div>
+                <button id="mobile-menu-btn-sticky" class="text-white hover:text-green-200">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+        
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 left-0 w-80 h-full bg-white shadow-2xl z-50 md:hidden">
+            <div class="p-4 bg-primary text-white flex justify-between items-center">
+                <h3 class="font-bold text-lg">Menu Navigasi</h3>
+                <button id="close-menu-btn" class="text-white hover:text-green-200">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <ul class="py-4">
+                <li><a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-home mr-3"></i>Beranda</a></li>
+                <li>
+                    <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b" onclick="toggleSubmenu('profil-submenu')">
+                        <i class="fas fa-info-circle mr-3"></i>Profil Desa <i class="fas fa-chevron-down float-right mt-1"></i>
+                    </a>
+                    <ul id="profil-submenu" class="hidden bg-gray-50">
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Sejarah Desa</a></li>
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Visi & Misi</a></li>
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Struktur Organisasi</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b" onclick="toggleSubmenu('pemerintahan-submenu')">
+                        <i class="fas fa-users mr-3"></i>Pemerintahan <i class="fas fa-chevron-down float-right mt-1"></i>
+                    </a>
+                    <ul id="pemerintahan-submenu" class="hidden bg-gray-50">
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Perangkat Desa</a></li>
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">BPD</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b"><i class="fas fa-newspaper mr-3"></i>Berita</a></li>
+                <li>
+                    <a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary border-b" onclick="toggleSubmenu('layanan-submenu')">
+                        <i class="fas fa-file-alt mr-3"></i>Layanan <i class="fas fa-chevron-down float-right mt-1"></i>
+                    </a>
+                    <ul id="layanan-submenu" class="hidden bg-gray-50">
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Surat Keterangan</a></li>
+                        <li><a href="#" class="block px-12 py-2 text-gray-600 hover:text-primary">Surat Pengantar</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary"><i class="fas fa-phone mr-3"></i>Kontak</a></li>
+                <li><a href="statistik.html" class="block px-6 py-3 text-gray-700 hover:bg-green-50 hover:text-primary"><i class="fas fa-chart-pie mr-3"></i>Statistik</a></li>
+            </ul>
+        </div>
+        
+        <!-- Mobile Menu Backdrop -->
+        <div id="mobile-menu-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+    </header>
+
+    <!-- Hero Slider -->
+    <section class="relative">
+        <div class="swiper hero-swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="relative h-96 md:h-[500px] bg-gradient-to-r from-green-600 to-green-400">
+                        <img src="https://via.placeholder.com/1200x500/22c55e/ffffff?text=Slide+1+-+Desa+Penunggul" alt="Slide 1" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center">
+                            <div class="container mx-auto px-4">
+                                <div class="text-white max-w-2xl">
+                                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Selamat Datang di Desa Penunggul</h2>
+                                    <p class="text-lg md:text-xl mb-6">Desa yang maju, mandiri, dan sejahtera dengan potensi alam yang melimpah</p>
+                                    <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                                        Jelajahi Desa
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative h-96 md:h-[500px] bg-gradient-to-r from-green-500 to-green-300">
+                        <img src="https://via.placeholder.com/1200x500/16a34a/ffffff?text=Slide+2+-+Kegiatan+Desa" alt="Slide 2" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center">
+                            <div class="container mx-auto px-4">
+                                <div class="text-white max-w-2xl">
+                                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Kegiatan Pembangunan Desa</h2>
+                                    <p class="text-lg md:text-xl mb-6">Berbagai program pembangunan untuk meningkatkan kesejahteraan masyarakat</p>
+                                    <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                                        Lihat Program
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="relative h-96 md:h-[500px] bg-gradient-to-r from-green-400 to-green-200">
+                        <img src="https://via.placeholder.com/1200x500/15803d/ffffff?text=Slide+3+-+Potensi+Desa" alt="Slide 3" class="w-full h-full object-cover opacity-80">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center">
+                            <div class="container mx-auto px-4">
+                                <div class="text-white max-w-2xl">
+                                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Potensi Wisata & UMKM</h2>
+                                    <p class="text-lg md:text-xl mb-6">Kembangkan potensi lokal untuk kemajuan ekonomi desa</p>
+                                    <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                                        Explore Wisata
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next text-white"></div>
+            <div class="swiper-button-prev text-white"></div>
+        </div>
+    </section>
+
+    <!-- Category Menu -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Layanan Desa</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-id-card text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Surat Keterangan</h3>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-file-signature text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Surat Pengantar</h3>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-chart-bar text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Data Statistik</h3>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-map-marked-alt text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Peta Desa</h3>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-bullhorn text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Pengumuman</h3>
+                </div>
+                <div class="text-center group cursor-pointer">
+                    <div class="bg-green-100 hover:bg-primary transition-colors duration-300 rounded-full w-20 h-20 mx-auto flex items-center justify-center mb-3 group-hover:scale-110 transform transition-transform">
+                        <i class="fas fa-phone-alt text-2xl text-primary group-hover:text-white"></i>
+                    </div>
+                    <h3 class="font-semibold text-gray-700 group-hover:text-primary">Kontak</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Articles Section (2/3) -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="text-2xl font-bold text-gray-800">Berita Terbaru</h2>
+                            <a href="#" class="text-primary hover:text-primary-dark font-semibold">Lihat Semua</a>
+                        </div>
+                        
+                        <!-- Featured Article -->
+                        <article class="mb-8 pb-8 border-b">
+                            <img src="https://via.placeholder.com/600x300/22c55e/ffffff?text=Berita+Utama" alt="Berita Utama" class="w-full h-64 object-cover rounded-lg mb-4">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fas fa-calendar mr-2"></i>
+                                <span>2 Oktober 2024</span>
+                                <i class="fas fa-user ml-4 mr-2"></i>
+                                <span>Admin Desa</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-primary cursor-pointer">
+                                Pembangunan Jalan Desa Tahap II Dimulai
+                            </h3>
+                            <p class="text-gray-600 mb-4">
+                                Pemerintah Desa Penunggul memulai pembangunan jalan desa tahap kedua yang akan menghubungkan wilayah utara dan selatan desa. Proyek ini diharapkan dapat meningkatkan aksesibilitas dan perekonomian masyarakat...
+                            </p>
+                            <a href="#" class="text-primary hover:text-primary-dark font-semibold">Baca Selengkapnya →</a>
+                        </article>
+                        
+                        <!-- Article List -->
+                        <div class="space-y-6">
+                            <article class="flex space-x-4">
+                                <img src="https://via.placeholder.com/150x100/16a34a/ffffff?text=Berita+1" alt="Berita 1" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                <div class="flex-1">
+                                    <div class="text-sm text-gray-500 mb-1">
+                                        <i class="fas fa-calendar mr-1"></i> 1 Oktober 2024
+                                    </div>
+                                    <h4 class="font-semibold text-gray-800 mb-2 hover:text-primary cursor-pointer">
+                                        Gotong Royong Pembersihan Lingkungan
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        Masyarakat Desa Penunggul mengadakan gotong royong pembersihan lingkungan setiap hari Minggu...
+                                    </p>
+                                </div>
+                            </article>
+                            
+                            <article class="flex space-x-4">
+                                <img src="https://via.placeholder.com/150x100/15803d/ffffff?text=Berita+2" alt="Berita 2" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                <div class="flex-1">
+                                    <div class="text-sm text-gray-500 mb-1">
+                                        <i class="fas fa-calendar mr-1"></i> 30 September 2024
+                                    </div>
+                                    <h4 class="font-semibold text-gray-800 mb-2 hover:text-primary cursor-pointer">
+                                        Pelatihan UMKM untuk Ibu-ibu PKK
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        Dinas Koperasi mengadakan pelatihan UMKM untuk meningkatkan keterampilan ibu-ibu PKK...
+                                    </p>
+                                </div>
+                            </article>
+                            
+                            <article class="flex space-x-4">
+                                <img src="https://via.placeholder.com/150x100/166534/ffffff?text=Berita+3" alt="Berita 3" class="w-32 h-24 object-cover rounded-lg flex-shrink-0">
+                                <div class="flex-1">
+                                    <div class="text-sm text-gray-500 mb-1">
+                                        <i class="fas fa-calendar mr-1"></i> 28 September 2024
+                                    </div>
+                                    <h4 class="font-semibold text-gray-800 mb-2 hover:text-primary cursor-pointer">
+                                        Panen Raya Padi di Desa Penunggul
+                                    </h4>
+                                    <p class="text-sm text-gray-600">
+                                        Musim panen raya padi telah tiba di Desa Penunggul dengan hasil yang memuaskan...
+                                    </p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar (1/3) -->
+                <div class="space-y-6">
+                    <!-- Statistics Widget -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-chart-pie text-primary mr-2"></i>
+                            Statistik Penduduk
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-male text-blue-500 mr-2"></i>
+                                    <span class="text-gray-700">Laki-laki</span>
+                                </div>
+                                <span class="font-semibold text-gray-800">1,245</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-blue-500 h-2 rounded-full" style="width: 52%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <div class="flex items-center">
+                                    <i class="fas fa-female text-pink-500 mr-2"></i>
+                                    <span class="text-gray-700">Perempuan</span>
+                                </div>
+                                <span class="font-semibold text-gray-800">1,155</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-pink-500 h-2 rounded-full" style="width: 48%"></div>
+                            </div>
+                            
+                            <div class="pt-4 border-t">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 font-semibold">Total Penduduk</span>
+                                    <span class="text-xl font-bold text-primary">2,400</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-semibold transition-colors">
+                            Lihat Detail Statistik
+                        </button>
+                    </div>
+                    
+                    <!-- Village Officials -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-users text-primary mr-2"></i>
+                            Perangkat Desa
+                        </h3>
+                        <div class="swiper officials-swiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="text-center">
+                                        <img src="https://via.placeholder.com/120x120/22c55e/ffffff?text=Kepala+Desa" alt="Kepala Desa" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                                        <h4 class="font-semibold text-gray-800">Bapak Suyanto</h4>
+                                        <p class="text-sm text-primary">Kepala Desa</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="text-center">
+                                        <img src="https://via.placeholder.com/120x120/16a34a/ffffff?text=Sekretaris" alt="Sekretaris Desa" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                                        <h4 class="font-semibold text-gray-800">Ibu Siti Aminah</h4>
+                                        <p class="text-sm text-primary">Sekretaris Desa</p>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="text-center">
+                                        <img src="https://via.placeholder.com/120x120/15803d/ffffff?text=Bendahara" alt="Bendahara Desa" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                                        <h4 class="font-semibold text-gray-800">Bapak Ahmad</h4>
+                                        <p class="text-sm text-primary">Bendahara Desa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination mt-4"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Prayer Schedule Widget -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-mosque text-primary mr-2"></i>
+                            Jadwal Sholat
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-700">Subuh</span>
+                                <span class="font-semibold text-gray-800">04:30</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-700">Dzuhur</span>
+                                <span class="font-semibold text-gray-800">12:15</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-700">Ashar</span>
+                                <span class="font-semibold text-gray-800">15:30</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-gray-700">Maghrib</span>
+                                <span class="font-semibold text-gray-800">18:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-gray-700">Isya</span>
+                                <span class="font-semibold text-gray-800">19:15</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center text-sm text-gray-500">
+                            <i class="fas fa-map-marker-alt mr-1"></i>
+                            Desa Penunggul, Jawa Timur
+                        </div>
+                    </div>
+                    
+                    <!-- Maps Widget -->
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-map-marked-alt text-primary mr-2"></i>
+                            Lokasi Desa
+                        </h3>
+                        <div class="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
+                            <div class="text-center text-gray-500">
+                                <i class="fas fa-map text-4xl mb-2"></i>
+                                <p>Peta Lokasi Desa Penunggul</p>
+                                <p class="text-sm">Klik untuk melihat di Google Maps</p>
+                            </div>
+                        </div>
+                        <button class="w-full mt-4 bg-primary hover:bg-primary-dark text-white py-2 rounded-lg font-semibold transition-colors">
+                            <i class="fas fa-external-link-alt mr-2"></i>
+                            Buka di Google Maps
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Galeri Kegiatan</h2>
+                <p class="text-gray-600">Dokumentasi berbagai kegiatan dan acara di Desa Penunggul</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/22c55e/ffffff?text=Kegiatan+1" alt="Kegiatan 1" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Gotong Royong Desa</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/16a34a/ffffff?text=Kegiatan+2" alt="Kegiatan 2" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Pelatihan UMKM</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/15803d/ffffff?text=Kegiatan+3" alt="Kegiatan 3" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Panen Raya</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/166534/ffffff?text=Kegiatan+4" alt="Kegiatan 4" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Pembangunan Jalan</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/14532d/ffffff?text=Kegiatan+5" alt="Kegiatan 5" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Acara 17 Agustus</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/0f172a/ffffff?text=Kegiatan+6" alt="Kegiatan 6" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Rapat Desa</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/1e293b/ffffff?text=Kegiatan+7" alt="Kegiatan 7" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Posyandu</h4>
+                </div>
+                
+                <div class="group cursor-pointer">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://via.placeholder.com/300x200/334155/ffffff?text=Kegiatan+8" alt="Kegiatan 8" class="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                            <i class="fas fa-search-plus text-white text-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></i>
+                        </div>
+                    </div>
+                    <h4 class="mt-2 font-semibold text-gray-800">Senam Sehat</h4>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors">
+                    Lihat Semua Foto
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mangrove Sunset Silhouette Section -->
+    <section class="relative overflow-hidden">
+        <style>
+            .sunset-bg { background: linear-gradient(180deg, #fde68a 0%, #f59e0b 45%, #7c3aed 100%); }
+            .silhouette-img { filter: saturate(0) brightness(0); opacity: 0.95; }
+        </style>
+        <div class="sunset-bg h-28 md:h-40 w-full"></div>
+        <div class="absolute inset-x-0 bottom-6 md:bottom-8 flex items-end justify-center px-2 gap-1 md:gap-2">
+            <img src="https://w7.pngwing.com/pngs/870/70/png-transparent-silhouette-tree-mangrove-animals-leaf-branch.png" alt="Mangrove" class="silhouette-img h-12 md:h-18 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1756455536.jpg" alt="Mangrove" class="silhouette-img h-10 md:h-16 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1695821851.jpg" alt="Mangrove" class="silhouette-img h-14 md:h-22 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/beautiful-tree-silhouette-260nw-663695179.jpg" alt="Tree" class="silhouette-img h-11 md:h-18 object-contain">
+            <img src="https://w7.pngwing.com/pngs/870/70/png-transparent-silhouette-tree-mangrove-animals-leaf-branch.png" alt="Mangrove" class="silhouette-img h-12 md:h-18 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1756455536.jpg" alt="Mangrove" class="silhouette-img h-10 md:h-16 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1695821851.jpg" alt="Mangrove" class="silhouette-img h-14 md:h-22 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/beautiful-tree-silhouette-260nw-663695179.jpg" alt="Tree" class="silhouette-img h-11 md:h-18 object-contain">
+            <img src="https://w7.pngwing.com/pngs/870/70/png-transparent-silhouette-tree-mangrove-animals-leaf-branch.png" alt="Mangrove" class="silhouette-img h-12 md:h-18 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1756455536.jpg" alt="Mangrove" class="silhouette-img h-10 md:h-16 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/mangrove-tree-vector-silhouette-black-260nw-1695821851.jpg" alt="Mangrove" class="silhouette-img h-14 md:h-22 object-contain">
+            <img src="https://www.shutterstock.com/image-vector/beautiful-tree-silhouette-260nw-663695179.jpg" alt="Tree" class="silhouette-img h-11 md:h-18 object-contain">
+        </div>
+        <svg class="absolute bottom-0 left-0 w-full" viewBox="0 0 1200 90" preserveAspectRatio="none">
+            <path d="M0,40 C200,90 400,0 600,40 C800,80 1000,20 1200,60 L1200,90 L0,90 Z" fill="#1f2937"/>
+        </svg>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- About Section -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://via.placeholder.com/50x50/22c55e/ffffff?text=LOGO" alt="Logo" class="w-12 h-12">
+                        <div>
+                            <h3 class="font-bold text-lg">Desa Penunggul</h3>
+                            <p class="text-sm text-gray-300">Jawa Timur</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Desa Penunggul adalah desa yang berkomitmen untuk mewujudkan masyarakat yang maju, mandiri, dan sejahtera melalui berbagai program pembangunan dan pemberdayaan masyarakat.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-primary transition-colors">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Menu Utama</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Profil Desa</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Pemerintahan</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Berita</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Layanan</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Galeri</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Kontak</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Layanan</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Surat Keterangan</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Surat Pengantar</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Data Statistik</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Peta Desa</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-primary transition-colors text-sm">Pengumuman</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Kontak Kami</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-primary mt-1"></i>
+                            <div>
+                                <p class="text-sm text-gray-300">Jl. Raya Desa Penunggul</p>
+                                <p class="text-sm text-gray-300">Kec. XXX, Kab. XXX</p>
+                                <p class="text-sm text-gray-300">Jawa Timur, Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-phone text-primary"></i>
+                            <span class="text-sm text-gray-300">+62 XXX-XXXX-XXXX</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-primary"></i>
+                            <span class="text-sm text-gray-300">desa.penunggul@email.com</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-globe text-primary"></i>
+                            <span class="text-sm text-gray-300">www.penunggul.desa.id</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom Footer -->
+        <div class="border-t border-gray-700">
+            <div class="container mx-auto px-4 py-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-sm text-gray-300 mb-4 md:mb-0">
+                        © 2024 Desa Penunggul. Semua hak cipta dilindungi.
+                    </p>
+                    <div class="flex items-center space-x-4 text-sm text-gray-300">
+                        <span>Powered by OpenSID</span>
+                        <span>|</span>
+                        <a href="#" class="hover:text-primary transition-colors">Kebijakan Privasi</a>
+                        <span>|</span>
+                        <a href="#" class="hover:text-primary transition-colors">Syarat & Ketentuan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Digital Clock
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('digital-clock').textContent = timeString;
+        }
+        
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenuBtnSticky = document.getElementById('mobile-menu-btn-sticky');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuBackdrop = document.getElementById('mobile-menu-backdrop');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuBackdrop.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuBackdrop.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuBtnSticky.addEventListener('click', openMobileMenu);
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileMenuBackdrop.addEventListener('click', closeMobileMenu);
+        
+        // Toggle submenu in mobile
+        function toggleSubmenu(submenuId) {
+            const submenu = document.getElementById(submenuId);
+            submenu.classList.toggle('hidden');
+        }
+        
+        // Hero Slider
+        const heroSwiper = new Swiper('.hero-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+        
+        // Officials Slider
+        const officialsSwiper = new Swiper('.officials-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.officials-swiper .swiper-pagination',
+                clickable: true,
+            },
+            slidesPerView: 1,
+            spaceBetween: 20,
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add scroll effect to sticky navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('shadow-2xl');
+            } else {
+                nav.classList.remove('shadow-2xl');
+            }
+        });
+    </script>
+</body>
+</html>
